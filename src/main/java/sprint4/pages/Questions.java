@@ -4,6 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class Questions {
     WebDriver driver;
@@ -20,6 +24,8 @@ public class Questions {
     } //скролл до модуля с вопросами
     public String getAccordeonItemText(int id) {
         driver.findElements(accordeonPanel).get(id).click();
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.visibilityOfElementLocated(accordeonPanel));
         return  driver.findElements(accordeonItemPanel).get(id).getText();
     } //возвращает текст ответа на полученный вопрос
 }
